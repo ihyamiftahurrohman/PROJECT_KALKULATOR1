@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Web</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <h1>Kalkulator Canggih</h1>
+
+    <!-- Dark Mode -->
+    <button id="darkModeBtn">Dark Mode</button>
+
+    <!-- Aritmatika -->
+    <div class="card">
+        <h2>Aritmatika</h2>
+
+        <input type="number" id="angka1" placeholder="Angka pertama">
+        <input type="number" id="angka2" placeholder="Angka kedua">
+
+        <button onclick="hitung('+')">+</button>
+        <button onclick="hitung('-')">-</button>
+        <button onclick="hitung('*')">×</button>
+        <button onclick="hitung('/')">÷</button>
+
+        <h3>Hasil:</h3>
+        <p id="hasil">0</p>
+    </div>
+
+    <!-- Operator Logika -->
+    <div class="card">
+        <h2>Operator Logika</h2>
+
+        <select id="logika1">
+            <option value="true">TRUE</option>
+            <option value="false">FALSE</option>
+        </select>
+
+        <select id="logika2">
+            <option value="true">TRUE</option>
+            <option value="false">FALSE</option>
+        </select>
+
+        <button onclick="logikaAND()">AND</button>
+        <button onclick="logikaOR()">OR</button>
+
+        <h3>Hasil:</h3>
+        <p id="hasilLogika">-</p>
+    </div>
+
+    <!-- Transformasi Bilangan -->
+    <div class="card">
+        <h2>Transformasi Bilangan</h2>
+
+        <input type="number" id="decimal" placeholder="Masukkan angka decimal">
+
+        <button onclick="konversiBiner()">Ke Biner</button>
+        <button onclick="konversiHexa()">Ke Hexa</button>
+
+        <h3>Hasil:</h3>
+        <p id="hasilTransformasi">-</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
