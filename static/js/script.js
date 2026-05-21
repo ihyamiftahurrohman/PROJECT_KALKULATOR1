@@ -80,3 +80,45 @@ function logika(op) {
         renderHistory(data.history);
     });
 }
+
+// =====================
+// TRANSFORMASI BILANGAN
+// =====================
+function transformasi(jenis) {
+    fetch('/transformasi', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            angka: document.getElementById("angkaTransformasi").value,
+            jenis: jenis
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById("rumusTransformasi").innerHTML = data.rumus;
+        document.getElementById("langkahTransformasi").innerHTML = data.langkah;
+        document.getElementById("hasilTransformasi").innerHTML = data.hasil;
+        renderHistory(data.history);
+    });
+}
+
+// =====================
+// KONVERSI SUHU
+// =====================
+function suhu(jenis) {
+    fetch('/suhu', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            celcius: document.getElementById("angkaTransformasi").value,
+            jenis: jenis
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById("rumusTransformasi").innerHTML = data.rumus;
+        document.getElementById("langkahTransformasi").innerHTML = data.langkah;
+        document.getElementById("hasilTransformasi").innerHTML = data.hasil;
+        renderHistory(data.history);
+    });
+}
