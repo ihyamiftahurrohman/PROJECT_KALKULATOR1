@@ -17,3 +17,22 @@ function renderHistory(historyList) {
     html += "</ul>";
     container.innerHTML = html;
 }
+function hitung(op) {
+    fetch('/aritmatika', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            angka1: document.getElementById("angka1").value,
+            angka2: document.getElementById("angka2").value,
+            operator: op
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById("rumusAritmatika").innerHTML = data.rumus;
+        document.getElementById("langkahAritmatika").innerHTML = data.langkah;
+        document.getElementById("hasil").innerHTML = data.hasil;
+
+        renderHistory(data.history);
+    });
+}
