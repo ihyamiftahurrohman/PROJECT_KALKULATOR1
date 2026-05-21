@@ -17,6 +17,10 @@ function renderHistory(historyList) {
     html += "</ul>";
     container.innerHTML = html;
 }
+
+// =====================
+// ARITMATIKA
+// =====================
 function hitung(op) {
     fetch('/aritmatika', {
         method: 'POST',
@@ -32,7 +36,47 @@ function hitung(op) {
         document.getElementById("rumusAritmatika").innerHTML = data.rumus;
         document.getElementById("langkahAritmatika").innerHTML = data.langkah;
         document.getElementById("hasil").innerHTML = data.hasil;
+        renderHistory(data.history);
+    });
+}
 
+function akar() {
+    fetch('/aritmatika', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            angka1: document.getElementById("angka1").value,
+            angka2: "0", 
+            operator: "akar"
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById("rumusAritmatika").innerHTML = data.rumus;
+        document.getElementById("langkahAritmatika").innerHTML = data.langkah;
+        document.getElementById("hasil").innerHTML = data.hasil;
+        renderHistory(data.history);
+    });
+}
+
+// =====================
+// LOGIKA
+// =====================
+function logika(op) {
+    fetch('/logika', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            a: document.getElementById("logika1").value,
+            b: document.getElementById("logika2").value,
+            operator: op
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById("rumusLogika").innerHTML = data.rumus;
+        document.getElementById("langkahLogika").innerHTML = data.langkah;
+        document.getElementById("hasilLogika").innerHTML = data.hasil;
         renderHistory(data.history);
     });
 }
