@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Web</title>
 
     <link rel="stylesheet"
@@ -12,62 +11,117 @@
 
 <body>
 
-    <h1>Kalkulator Canggih</h1>
+<div style="text-align: right; padding: 10px 20px;">
+    <button id="darkModeBtn" style="background: #44475a; color: #f8f8f2; border: 1px solid #6272a4;">Toggle Tema</button>
+</div>
+<h1>Kalkulator Canggih</h1>
 
-    <!-- Dark Mode -->
-    <button id="darkModeBtn">Dark Mode</button>
+<div class="container">
 
-    <!-- Aritmatika -->
-    <div class="card">
-        <h2>Aritmatika</h2>
+<div class="card">
 
-        <input type="number" id="angka1" placeholder="Angka pertama">
-        <input type="number" id="angka2" placeholder="Angka kedua">
+    <h2>Aritmatika</h2>
 
-        <button onclick="hitung('+')">+</button>
-        <button onclick="hitung('-')">-</button>
-        <button onclick="hitung('*')">×</button>
-        <button onclick="hitung('/')">÷</button>
+    <input type="number" id="angka1" placeholder="Angka 1">
 
-        <h3>Hasil:</h3>
-        <p id="hasil">0</p>
+    <input type="number" id="angka2" placeholder="Angka 2">
+
+    <button onclick="hitung('+')">+</button>
+
+    <button onclick="hitung('-')">-</button>
+
+    <button onclick="hitung('*')">×</button>
+
+    <button onclick="hitung('/')">÷</button>
+
+    <button onclick="hitung('%')">%</button>
+
+    <button onclick="hitung('^')">^</button>
+
+    <button onclick="hitung('//')">//</button>
+
+    <button onclick="akar()">√</button>
+
+    <div class="result-box">
+        <p><strong>Rumus:</strong> <span id="rumusAritmatika">-</span></p>
+        <p><strong>Langkah:</strong> <span id="langkahAritmatika">-</span></p>
+        <p><strong>Hasil:</strong> <span id="hasil">-</span></p>
     </div>
 
-    <!-- Operator Logika -->
-    <div class="card">
-        <h2>Operator Logika</h2>
+</div>
 
-        <select id="logika1">
-            <option value="true">TRUE</option>
-            <option value="false">FALSE</option>
-        </select>
+<div class="card">
+    <h2>Logika</h2>
+    <input type="text" id="logika1" placeholder="Input 1 (true/false atau 1/0)">
+    <input type="text" id="logika2" placeholder="Input 2 (true/false atau 1/0)">
+    <button onclick="logika('AND')">AND</button>
+    <button onclick="logika('OR')">OR</button>
+    <button onclick="logika('NOT')">NOT (hanya Input 1)</button>
+    <button onclick="logika('XOR')">XOR</button>
+    <button onclick="logika('NAND')">NAND</button>
+    <button onclick="logika('NOR')">NOR</button>
+    <div class="result-box">
+        <p><strong>Rumus:</strong> <span id="rumusLogika">-</span></p>
+        <p><strong>Langkah:</strong> <span id="langkahLogika">-</span></p>
+        <p><strong>Hasil:</strong> <span id="hasilLogika">-</span></p>
+    </div>
+</div>
 
-        <select id="logika2">
-            <option value="true">TRUE</option>
-            <option value="false">FALSE</option>
-        </select>
-
-        <button onclick="logikaAND()">AND</button>
-        <button onclick="logikaOR()">OR</button>
-
-        <h3>Hasil:</h3>
-        <p id="hasilLogika">-</p>
+<div class="card">
+    <h2>Transformasi</h2>
+    <input type="number" id="angkaTransformasi" placeholder="Masukkan Angka (Desimal / Celcius / IDR)">
+    
+    <div style="margin-top: 15px;">
+        <h3 style="font-size: 14px; margin-top: 0;">Basis Angka (Desimal ke...)</h3>
+        <button onclick="transformasi('biner')">Ke Biner</button>
+        <button onclick="transformasi('oktal')">Ke Oktal</button>
+        <button onclick="transformasi('hexa')">Ke Hexa</button>
     </div>
 
-    <!-- Transformasi Bilangan -->
-    <div class="card">
-        <h2>Transformasi Bilangan</h2>
-
-        <input type="number" id="decimal" placeholder="Masukkan angka decimal">
-
-        <button onclick="konversiBiner()">Ke Biner</button>
-        <button onclick="konversiHexa()">Ke Hexa</button>
-
-        <h3>Hasil:</h3>
-        <p id="hasilTransformasi">-</p>
+    <div style="margin-top: 15px;">
+        <h3 style="font-size: 14px; margin-top: 0;">Suhu (Celcius ke...)</h3>
+        <button onclick="suhu('fahrenheit')">Ke Fahrenheit</button>
+        <button onclick="suhu('kelvin')">Ke Kelvin</button>
+        <button onclick="suhu('reamur')">Ke Reamur</button>
     </div>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <div style="margin-top: 15px;">
+        <h3 style="font-size: 14px; margin-top: 0;">Mata Uang (IDR ke...)</h3>
+        <button onclick="mata_uang('usd')">Ke USD</button>
+        <button onclick="mata_uang('eur')">Ke EUR</button>
+        <button onclick="mata_uang('sgd')">Ke SGD</button>
+    </div>
+
+    <div class="result-box">
+        <p><strong>Rumus:</strong> <span id="rumusTransformasi">-</span></p>
+        <p><strong>Langkah:</strong> <span id="langkahTransformasi">-</span></p>
+        <p><strong>Hasil:</strong> <span id="hasilTransformasi">-</span></p>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Matematika Lanjut</h2>
+    <input type="number" id="angkaBonus" placeholder="Masukkan N">
+    <button onclick="fibonacci()">Deret Fibonacci</button>
+    <button onclick="faktorial()">Faktorial</button>
+    <div class="result-box">
+        <p><strong>Rumus:</strong> <span id="rumusBonus">-</span></p>
+        <p><strong>Langkah:</strong> <span id="langkahBonus">-</span></p>
+        <p><strong>Hasil:</strong> <span id="hasilBonus">-</span></p>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; position: relative;">
+    <h2>Riwayat Perhitungan</h2>
+    <button onclick="clearHistory()" style="position: absolute; top: 20px; right: 25px; background: #ff5555; color: #fff; border-color: #ff5555;">Hapus Riwayat</button>
+    <div id="historyContainer" class="history-box">
+        <p>Belum ada riwayat.</p>
+    </div>
+</div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>
