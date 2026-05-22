@@ -122,3 +122,44 @@ function suhu(jenis) {
         renderHistory(data.history);
     });
 }
+
+// =====================
+// KONVERSI MATA UANG
+// =====================
+function mata_uang(jenis) {
+    fetch('/mata_uang', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            idr: document.getElementById("angkaTransformasi").value,
+            jenis: jenis
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById("rumusTransformasi").innerHTML = data.rumus;
+        document.getElementById("langkahTransformasi").innerHTML = data.langkah;
+        document.getElementById("hasilTransformasi").innerHTML = data.hasil;
+        renderHistory(data.history);
+    });
+}
+
+// =====================
+// MATEMATIKA LANJUT
+// =====================
+function fibonacci() {
+    fetch('/fibonacci', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            n: document.getElementById("angkaBonus").value
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById("rumusBonus").innerHTML = data.rumus;
+        document.getElementById("langkahBonus").innerHTML = data.langkah;
+        document.getElementById("hasilBonus").innerHTML = data.hasil; // array di konversi jadi string
+        renderHistory(data.history);
+    });
+}
