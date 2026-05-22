@@ -33,14 +33,35 @@ body::after {
     pointer-events: none;
 }
 
+h1 {
+    text-align: center;
+    color: #ff79c6; /* Dracula Pink */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 3;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .card {
     padding: 25px;
-    background: #21222c;
+    background: #21222c; /* Dracula dark bg */
+    border: 1px solid #6272a4; /* Dracula comment */
     border-radius: 12px;
+    box-shadow: 0 0 20px rgba(189, 147, 249, 0.2), inset 0 0 10px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 3;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
 }
