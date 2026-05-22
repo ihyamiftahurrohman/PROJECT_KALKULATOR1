@@ -163,3 +163,46 @@ function fibonacci() {
         renderHistory(data.history);
     });
 }
+
+function faktorial() {
+    fetch('/faktorial', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            n: document.getElementById("angkaBonus").value
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById("rumusBonus").innerHTML = data.rumus;
+        document.getElementById("langkahBonus").innerHTML = data.langkah;
+        document.getElementById("hasilBonus").innerHTML = data.hasil;
+        renderHistory(data.history);
+    });
+}
+
+// =====================
+// HAPUS RIWAYAT
+// =====================
+function clearHistory() {
+    fetch('/clear_history', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+    })
+    .then(r => r.json())
+    .then(data => {
+        if(data.status === 'success') {
+            renderHistory(data.history);
+        }
+    });
+}
+
+// =====================
+// TOGGLE TEMA
+// =====================
+const darkModeBtn = document.getElementById("darkModeBtn");
+if (darkModeBtn) {
+    darkModeBtn.onclick = function () {
+        document.body.classList.toggle("light-mode");
+    };
+}
