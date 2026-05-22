@@ -32,3 +32,15 @@ body::after {
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
 }
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    padding: 25px;
+    background: #21222c;
+    border-radius: 12px;
+}
