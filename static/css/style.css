@@ -66,115 +66,55 @@ h1 {
     flex-direction: column;
 }
 
-.card:hover {
-    box-shadow: 0 0 30px rgba(189, 147, 249, 0.4), inset 0 0 15px rgba(0,0,0,0.7);
+/* Glitch animation for title */
+@keyframes glitch {
+    0% { transform: translate(0) }
+    20% { transform: translate(-2px, 2px) }
+    40% { transform: translate(-2px, -2px) }
+    60% { transform: translate(2px, 2px) }
+    80% { transform: translate(2px, -2px) }
+    100% { transform: translate(0) }
 }
 
-.card h2 {
-    color: #8be9fd; /* Dracula Cyan */
-    border-bottom: 1px dashed #6272a4;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    font-size: 18px;
-    letter-spacing: 1px;
+h1:hover {
+    animation: glitch 0.2s cubic-bezier(.25, .46, .45, .94) both infinite;
 }
 
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    background: #282a36;
-    color: #50fa7b; /* Dracula Green */
-    border: 1px solid #44475a;
-    border-radius: 6px;
-    outline: none;
-    font-family: 'Fira Code', monospace;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-input:focus, select:focus {
-    border-color: #ff79c6;
-    box-shadow: 0 0 8px rgba(255, 121, 198, 0.5);
-}
-
-input::placeholder {
-    color: #6272a4;
-}
-
-button {
-    padding: 12px 15px;
-    margin: 6px;
-    border: 1px solid #bd93f9;
-    border-radius: 6px;
-    cursor: pointer;
-    background: transparent;
-    color: #bd93f9; /* Dracula Purple */
-    font-weight: bold;
-    font-family: 'Fira Code', monospace;
-    font-size: 16px;
-    transition: 0.3s;
-    box-shadow: 0 0 5px rgba(189, 147, 249, 0.2);
-}
-
-button:hover {
-    background: #bd93f9;
-    color: #282a36;
-    box-shadow: 0 0 15px #bd93f9;
-    transform: translateY(-2px);
-}
-
-button:active {
-    transform: translateY(1px);
-}
-
-/* Button color variations for hacker feel */
-button:nth-child(even) {
-    border-color: #ffb86c;
-    color: #ffb86c;
-    box-shadow: 0 0 5px rgba(255, 184, 108, 0.2);
-}
-
-button:nth-child(even):hover {
-    background: #ffb86c;
-    color: #282a36;
-    box-shadow: 0 0 15px #ffb86c;
-}
-
-button:nth-child(3n) {
-    border-color: #8be9fd;
-    color: #8be9fd;
-    box-shadow: 0 0 5px rgba(139, 233, 253, 0.2);
-}
-
-button:nth-child(3n):hover {
-    background: #8be9fd;
-    color: #282a36;
-    box-shadow: 0 0 15px #8be9fd;
-}
-
-h3 {
-    color: #f1fa8c; /* Dracula Yellow */
-    margin-top: 25px;
-    font-size: 16px;
-    text-transform: uppercase;
-}
-
-#hasil,
-#hasilLogika,
-#hasilTransformasi {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #50fa7b; /* Dracula Green */
-    text-shadow: 0 0 10px #50fa7b;
+.result-box {
+    margin-top: 15px;
     padding: 15px;
-    background: #282a36;
+    background: rgba(0, 0, 0, 0.2);
     border: 1px dashed #6272a4;
     border-radius: 8px;
-    word-break: break-all;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
+    font-size: 14px;
 }
+
+.result-box p {
+    margin: 5px 0;
+}
+
+.result-box p span {
+    color: #50fa7b; /* Dracula green for results */
+    font-weight: bold;
+}
+
+/* Override existing #hasil styles so they don't look weird inside result-box */
+#hasil, #hasilLogika, #hasilTransformasi, #hasilBonus, #hasilAritmatika {
+    font-size: 16px;
+    text-shadow: none;
+    padding: 0;
+    background: transparent;
+    border: none;
+    min-height: auto;
+    display: inline;
+}
+
+.history-box {
+    margin-top: 15px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
