@@ -30,3 +30,24 @@ def record_history(kategori, operasi, rumus, langkah, hasil):
 @app.route('/')
 def home():
     return render_template('index.html')
+
+# =========================================
+# ARITMATIKA
+# =========================================
+@app.route('/aritmatika', methods=['POST'])
+def aritmatika():
+    data = request.get_json()
+
+# =========================================
+# OPERATOR LOGIKA
+# =========================================
+@app.route('/logika', methods=['POST'])
+def logika():
+    data = request.get_json()
+
+# =========================================
+# TRANSFORMASI BILANGAN
+# =========================================
+@app.route('/transformasi', methods=['POST'])
+def transformasi():
+    data = request.get_json()
