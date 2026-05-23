@@ -51,3 +51,83 @@ def logika():
 @app.route('/transformasi', methods=['POST'])
 def transformasi():
     data = request.get_json()
+
+
+# =========================================
+# KONVERSI SUHU
+# =========================================
+@app.route('/suhu', methods=['POST'])
+def suhu():
+    data = request.get_json()
+
+# =========================================
+# KONVERSI MATA UANG
+# =========================================
+@app.route('/mata_uang', methods=['POST'])
+def mata_uang():
+    data = request.get_json()
+
+# =========================================
+# FIBONACCI
+# =========================================
+@app.route('/fibonacci', methods=['POST'])
+def fibonacci():
+    data = request.get_json()
+
+# =========================================
+# FAKTORIAL
+# =========================================
+@app.route('/faktorial', methods=['POST'])
+def faktorial():
+    data = request.get_json()
+
+# =========================================
+# HAPUS RIWAYAT
+# =========================================
+@app.route('/clear_history', methods=['POST'])
+def clear_history():
+    global history
+    history.clear()
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+# =========================================
+# KONVERSI SUHU
+# =========================================
+@app.route('/suhu', methods=['POST'])
+def suhu():
+    data = request.get_json()
+
+# =========================================
+# KONVERSI MATA UANG
+# =========================================
+@app.route('/mata_uang', methods=['POST'])
+def mata_uang():
+    data = request.get_json()
+
+# =========================================
+# FIBONACCI
+# =========================================
+@app.route('/fibonacci', methods=['POST'])
+def fibonacci():
+    data = request.get_json()
+
+# =========================================
+# FAKTORIAL
+# =========================================
+@app.route('/faktorial', methods=['POST'])
+def faktorial():
+    data = request.get_json()
+
+# =========================================
+# HAPUS RIWAYAT
+# =========================================
+@app.route('/clear_history', methods=['POST'])
+def clear_history():
+    global history
+    history.clear()
+
+if __name__ == '__main__':
+    app.run(debug=True)    
