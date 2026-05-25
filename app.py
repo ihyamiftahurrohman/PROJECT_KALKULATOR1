@@ -9,6 +9,24 @@ from modules.konversi import *
 
 app = Flask(__name__)
 
+# Auto-cache-busting for static files (CSS/JS)
+import os
+@app.context_processor
+def override_url_for():
+    return dict(url_for=dated_url_for)
+
+def dated_url_for(endpoint, **values):
+    if endpoint == 'static':
+        filename = values.get('filename', None)
+        if filename:
+            file_path = os.path.join(app.root_path, endpoint, filename)
+            try:
+                values['q'] = int(os.stat(file_path).st_mtime)
+            except OSError:
+                pass
+    from flask import url_for
+    return url_for(endpoint, **values)
+
 # Global history
 history = []
 
@@ -53,36 +71,36 @@ def aritmatika():
 
     if operator == "+":
         hasil = tambah(angka1, angka2)
-        rumus = "a + b"
-        langkah = f"{angka1} + {angka2} = {hasil}"
+        rumus = "Penjumlahan: a + b"
+        langkah = f"Menambahkan {angka1} dengan {angka2}: {angka1} + {angka2} = {hasil}"
     elif operator == "-":
         hasil = kurang(angka1, angka2)
-        rumus = "a - b"
-        langkah = f"{angka1} - {angka2} = {hasil}"
+        rumus = "Pengurangan: a - b"
+        langkah = f"Mengurangi {angka1} dengan {angka2}: {angka1} - {angka2} = {hasil}"
     elif operator == "*":
         hasil = kali(angka1, angka2)
-        rumus = "a × b"
-        langkah = f"{angka1} × {angka2} = {hasil}"
+        rumus = "Perkalian: a × b"
+        langkah = f"Mengalikan {angka1} dengan {angka2}: {angka1} × {angka2} = {hasil}"
     elif operator == "/":
         hasil = bagi(angka1, angka2)
-        rumus = "a ÷ b"
-        langkah = f"{angka1} ÷ {angka2} = {hasil}"
+        rumus = "Pembagian: a ÷ b"
+        langkah = f"Membagi {angka1} dengan {angka2}: {angka1} ÷ {angka2} = {hasil}"
     elif operator == "%":
         hasil = modulus(angka1, angka2)
-        rumus = "a % b"
-        langkah = f"{angka1} % {angka2} = {hasil}"
+        rumus = "Modulus: a % b (Sisa hasil bagi)"
+        langkah = f"Mencari sisa pembagian dari {angka1} dibagi {angka2}: {angka1} % {angka2} = {hasil}"
     elif operator == "**":
         hasil = pangkat(angka1, angka2)
-        rumus = "a pangkat b"
-        langkah = f"{angka1}^{angka2} = {hasil}"
+        rumus = "Perpangkatan: a^b (a pangkat b)"
+        langkah = f"Mengalikan {angka1} sebanyak {angka2} kali: {angka1}^{angka2} = {hasil}"
     elif operator == "//":
         hasil = floor_division(angka1, angka2)
-        rumus = "a // b"
-        langkah = f"{angka1} // {angka2} = {hasil}"
+        rumus = "Floor Division: a // b (Pembagian bulat ke bawah)"
+        langkah = f"Hasil bagi bulat dari {angka1} ÷ {angka2} (dibulatkan ke bawah): {angka1} // {angka2} = {hasil}"
     elif operator == "akar":
         hasil = akar(angka1)
-        rumus = "√a"
-        langkah = f"√{angka1} = {hasil}"
+        rumus = "Akar Kuadrat: √a"
+        langkah = f"Mencari nilai yang jika dikalikan dirinya sendiri menghasilkan {angka1}: √{angka1} = {hasil}"
 
     record_history("Aritmatika", operator, rumus, langkah, hasil)
 
@@ -113,28 +131,28 @@ def logika():
 
     if operator == "AND":
         hasil = operasi_and(a, b)
-        rumus = "A AND B"
-        langkah = f"{a} AND {b} = {hasil}"
+        rumus = "Logika AND: A ∧ B (Bernilai True/1 jika kedua input True)"
+        langkah = f"Memeriksa apakah ({a}) DAN ({b}) keduanya True -> {hasil}"
     elif operator == "OR":
         hasil = operasi_or(a, b)
-        rumus = "A OR B"
-        langkah = f"{a} OR {b} = {hasil}"
+        rumus = "Logika OR: A ∨ B (Bernilai True/1 jika salah satu atau kedua input True)"
+        langkah = f"Memeriksa apakah salah satu dari ({a}) ATAU ({b}) bernilai True -> {hasil}"
     elif operator == "NOT":
         hasil = operasi_not(a)
-        rumus = "NOT A"
-        langkah = f"NOT {a} = {hasil}"
+        rumus = "Logika NOT: ¬A (Membalik nilai input A)"
+        langkah = f"Membalik nilai kebenaran dari ({a}) -> NOT {a} = {hasil}"
     elif operator == "XOR":
         hasil = operasi_xor(a, b)
-        rumus = "A XOR B"
-        langkah = f"{a} XOR {b} = {hasil}"
+        rumus = "Logika XOR: A ⊕ B (Bernilai True/1 jika kedua input berbeda)"
+        langkah = f"Memeriksa apakah ({a}) berbeda dengan ({b}) -> {hasil}"
     elif operator == "NAND":
         hasil = operasi_nand(a, b)
-        rumus = "A NAND B"
-        langkah = f"{a} NAND {b} = {hasil}"
+        rumus = "Logika NAND: ¬(A ∧ B) (Kebalikan dari AND)"
+        langkah = f"Mengambil kebenaran dari: NOT ({a} AND {b}) -> {hasil}"
     elif operator == "NOR":
         hasil = operasi_nor(a, b)
-        rumus = "A NOR B"
-        langkah = f"{a} NOR {b} = {hasil}"
+        rumus = "Logika NOR: ¬(A ∨ B) (Kebalikan dari OR)"
+        langkah = f"Mengambil kebenaran dari: NOT ({a} OR {b}) -> {hasil}"
 
     record_history("Logika", operator, rumus, langkah, hasil)
 
@@ -164,16 +182,16 @@ def transformasi():
 
     if jenis == "biner":
         hasil = decimal_ke_biner(angka)
-        rumus = "Desimal -> Biner"
-        langkah = f"bin({angka}) = {hasil}"
+        rumus = "Desimal ke Biner (Basis 10 -> Basis 2)"
+        langkah = f"Membagi angka desimal {angka} dengan 2 secara berulang hingga sisa 0 atau 1: bin({angka}) = {hasil}"
     elif jenis == "oktal":
         hasil = decimal_ke_oktal(angka)
-        rumus = "Desimal -> Oktal"
-        langkah = f"oct({angka}) = {hasil}"
+        rumus = "Desimal ke Oktal (Basis 10 -> Basis 8)"
+        langkah = f"Membagi angka desimal {angka} dengan 8 secara berulang hingga sisa 0-7: oct({angka}) = {hasil}"
     elif jenis == "hexa":
         hasil = decimal_ke_hexa(angka)
-        rumus = "Desimal -> Heksadesimal"
-        langkah = f"hex({angka}) = {hasil}"
+        rumus = "Desimal ke Heksadesimal (Basis 10 -> Basis 16)"
+        langkah = f"Membagi angka desimal {angka} dengan 16 secara berulang (sisa 10-15 diganti A-F): hex({angka}) = {hasil}"
 
     record_history("Transformasi Basis", jenis, rumus, langkah, hasil)
 
@@ -203,16 +221,16 @@ def suhu():
 
     if jenis == "fahrenheit":
         hasil = celcius_ke_fahrenheit(celcius)
-        rumus = "(C × 9/5) + 32"
-        langkah = f"({celcius} × 9/5) + 32 = {hasil}"
+        rumus = "Konversi ke Fahrenheit: (°C × 9/5) + 32"
+        langkah = f"({celcius} × 1.8) + 32 = {celcius * 1.8} + 32 = {hasil}°F"
     elif jenis == "kelvin":
         hasil = celcius_ke_kelvin(celcius)
-        rumus = "C + 273.15"
-        langkah = f"{celcius} + 273.15 = {hasil}"
+        rumus = "Konversi ke Kelvin: °C + 273.15"
+        langkah = f"{celcius} + 273.15 = {hasil} K"
     elif jenis == "reamur":
         hasil = celcius_ke_reamur(celcius)
-        rumus = "C × 4/5"
-        langkah = f"{celcius} × 4/5 = {hasil}"
+        rumus = "Konversi ke Reamur: °C × 4/5"
+        langkah = f"{celcius} × 0.8 = {hasil}°Re"
 
     record_history("Suhu", jenis, rumus, langkah, hasil)
 
@@ -242,16 +260,16 @@ def mata_uang():
 
     if jenis == "usd":
         hasil = idr_ke_usd(idr)
-        rumus = "IDR / 16000"
-        langkah = f"{idr} / 16000 = {hasil}"
+        rumus = "IDR ke USD (Kurs: Rp16.000 / USD)"
+        langkah = f"Rp{idr:,.0f} ÷ Rp16.000 = ${hasil:.2f} USD"
     elif jenis == "eur":
         hasil = idr_ke_eur(idr)
-        rumus = "IDR / 17500"
-        langkah = f"{idr} / 17500 = {hasil}"
+        rumus = "IDR ke EUR (Kurs: Rp17.500 / EUR)"
+        langkah = f"Rp{idr:,.0f} ÷ Rp17.500 = €{hasil:.2f} EUR"
     elif jenis == "sgd":
         hasil = idr_ke_sgd(idr)
-        rumus = "IDR / 11800"
-        langkah = f"{idr} / 11800 = {hasil}"
+        rumus = "IDR ke SGD (Kurs: Rp11.800 / SGD)"
+        langkah = f"Rp{idr:,.0f} ÷ Rp11.800 = S${hasil:.2f} SGD"
 
     record_history("Mata Uang", jenis, rumus, langkah, hasil)
 
@@ -275,8 +293,8 @@ def fibonacci():
         n = 0
 
     hasil = fibonacci_list(n)
-    rumus = "F(n) = F(n-1) + F(n-2)"
-    langkah = f"Deret Fibonacci hingga {n} angka"
+    rumus = "Deret Fibonacci: F(n) = F(n-1) + F(n-2) dengan F(0)=0, F(1)=1"
+    langkah = f"Menghasilkan deret hingga suku ke-{n}: {', '.join(map(str, hasil[:10]))}{'...' if len(hasil) > 10 else ''}"
     
     record_history("Bonus", "fibonacci", rumus, langkah, str(hasil))
 
@@ -300,8 +318,13 @@ def faktorial():
         n = 0
 
     hasil = hitung_faktorial(n)
-    rumus = "n! = n × (n-1) × ... × 1"
-    langkah = f"{n}! = {hasil}"
+    rumus = "Faktorial: n! = n × (n-1) × ... × 1 (khusus 0! = 1)"
+    
+    if n > 0:
+        mult_steps = " × ".join(str(i) for i in range(n, 0, -1))
+        langkah = f"{n}! = {mult_steps} = {hasil}"
+    else:
+        langkah = f"0! = {hasil}"
 
     record_history("Bonus", "faktorial", rumus, langkah, hasil)
 

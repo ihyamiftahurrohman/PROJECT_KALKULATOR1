@@ -1,45 +1,70 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap');
 
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Fira Code', monospace;
+    font-family: 'Rajdhani', sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #282a36; /* Dracula bg */
-    background-image: 
-        radial-gradient(circle at 50% 50%, rgba(189, 147, 249, 0.05) 0%, transparent 80%),
-        linear-gradient(rgba(40, 42, 54, 1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(40, 42, 54, 1) 1px, transparent 1px);
-    background-size: 100% 100%, 20px 20px, 20px 20px;
-    color: #f8f8f2;
+    /* Deep synthwave navy-purple gradient */
+    background: linear-gradient(180deg, #0a0015 0%, #1a0033 30%, #0d001a 60%, #120029 100%);
+    background-attachment: fixed;
+    color: #e0d6f2;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
-/* scanline effect */
+/* Synthwave horizon grid effect */
+body::before {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: -50%;
+    right: -50%;
+    height: 45%;
+    background:
+        linear-gradient(180deg, transparent 0%, rgba(255, 0, 128, 0.06) 100%),
+        repeating-linear-gradient(90deg, rgba(255, 0, 200, 0.08) 0px, transparent 1px, transparent 80px),
+        repeating-linear-gradient(0deg, rgba(255, 0, 200, 0.06) 0px, transparent 1px, transparent 40px);
+    transform: perspective(500px) rotateX(60deg);
+    transform-origin: bottom center;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Subtle ambient glow overlay */
 body::after {
-    content: " ";
+    content: "";
     display: block;
     position: fixed;
     top: 0;
     left: 0;
-    bottom: 0;
     right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    z-index: 2;
-    background-size: 100% 2px, 3px 100%;
+    bottom: 0;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 0, 128, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(0, 255, 255, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(255, 0, 200, 0.04) 0%, transparent 50%);
+    z-index: 0;
     pointer-events: none;
 }
 
 h1 {
     text-align: center;
-    color: #ff79c6; /* Dracula Pink */
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 2.8rem;
+    /* Chrome/sunset gradient text */
+    background: linear-gradient(180deg, #fff 0%, #ff6ec7 30%, #ff2a6d 50%, #d300c5 70%, #7b2fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
-    margin-bottom: 30px;
+    letter-spacing: 6px;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 128, 0.6)) drop-shadow(0 0 40px rgba(255, 0, 200, 0.3));
+    margin-bottom: 35px;
     position: relative;
     z-index: 3;
 }
@@ -47,7 +72,7 @@ h1 {
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 20px;
+    gap: 22px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
@@ -55,123 +80,149 @@ h1 {
 
 .card {
     padding: 25px;
-    background: #21222c; /* Dracula dark bg */
-    border: 1px solid #6272a4; /* Dracula comment */
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(189, 147, 249, 0.2), inset 0 0 10px rgba(0,0,0,0.5);
+    /* Glassmorphism card with synthwave tint */
+    background: linear-gradient(135deg, rgba(20, 0, 50, 0.85) 0%, rgba(30, 5, 60, 0.75) 100%);
+    border: 1px solid rgba(255, 0, 200, 0.25);
+    border-radius: 14px;
+    box-shadow:
+        0 0 20px rgba(255, 0, 128, 0.12),
+        0 0 60px rgba(120, 0, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     position: relative;
     z-index: 3;
-    transition: 0.3s;
+    transition: all 0.4s ease;
     display: flex;
     flex-direction: column;
 }
 
 .card:hover {
-    box-shadow: 0 0 30px rgba(189, 147, 249, 0.4), inset 0 0 15px rgba(0,0,0,0.7);
+    border-color: rgba(255, 0, 200, 0.5);
+    box-shadow:
+        0 0 30px rgba(255, 0, 128, 0.25),
+        0 0 80px rgba(120, 0, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px);
 }
 
 .card h2 {
-    color: #8be9fd; /* Dracula Cyan */
-    border-bottom: 1px dashed #6272a4;
-    padding-bottom: 10px;
+    font-family: 'Orbitron', sans-serif;
+    color: #00f0ff; /* Neon cyan */
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    padding-bottom: 12px;
     margin-bottom: 20px;
     text-transform: uppercase;
-    font-size: 18px;
-    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
 }
 
 input, select {
     width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    background: #282a36;
-    color: #50fa7b; /* Dracula Green */
-    border: 1px solid #44475a;
-    border-radius: 6px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background: rgba(10, 0, 30, 0.7);
+    color: #00f0ff;
+    border: 1px solid rgba(255, 0, 200, 0.2);
+    border-radius: 8px;
     outline: none;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Rajdhani', sans-serif;
     font-size: 16px;
-    transition: 0.3s;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 input:focus, select:focus {
-    border-color: #ff79c6;
-    box-shadow: 0 0 8px rgba(255, 121, 198, 0.5);
+    border-color: #ff2a6d;
+    box-shadow: 0 0 12px rgba(255, 42, 109, 0.4), 0 0 30px rgba(255, 42, 109, 0.1);
+    background: rgba(15, 0, 40, 0.9);
 }
 
 input::placeholder {
-    color: #6272a4;
+    color: rgba(160, 140, 200, 0.5);
+    font-weight: 400;
 }
 
 button {
-    padding: 12px 15px;
-    margin: 6px;
-    border: 1px solid #bd93f9;
-    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 5px;
+    border: 1px solid #ff2a6d;
+    border-radius: 8px;
     cursor: pointer;
     background: transparent;
-    color: #bd93f9; /* Dracula Purple */
-    font-weight: bold;
-    font-family: 'Fira Code', monospace;
-    font-size: 16px;
-    transition: 0.3s;
-    box-shadow: 0 0 5px rgba(189, 147, 249, 0.2);
+    color: #ff2a6d; /* Neon pink */
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(255, 42, 109, 0.15);
+    text-transform: uppercase;
 }
 
 button:hover {
-    background: #bd93f9;
-    color: #282a36;
-    box-shadow: 0 0 15px #bd93f9;
+    background: linear-gradient(135deg, #ff2a6d, #d300c5);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 42, 109, 0.5), 0 0 40px rgba(211, 0, 197, 0.2);
     transform: translateY(-2px);
+    border-color: transparent;
 }
 
 button:active {
     transform: translateY(1px);
 }
 
-/* Button color variations for hacker feel */
+/* Button color variations — synthwave palette */
 button:nth-child(even) {
-    border-color: #ffb86c;
-    color: #ffb86c;
-    box-shadow: 0 0 5px rgba(255, 184, 108, 0.2);
+    border-color: #ff6ec7;
+    color: #ff6ec7;
+    box-shadow: 0 0 8px rgba(255, 110, 199, 0.15);
 }
 
 button:nth-child(even):hover {
-    background: #ffb86c;
-    color: #282a36;
-    box-shadow: 0 0 15px #ffb86c;
+    background: linear-gradient(135deg, #ff6ec7, #ff2a6d);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 110, 199, 0.5);
+    border-color: transparent;
 }
 
 button:nth-child(3n) {
-    border-color: #8be9fd;
-    color: #8be9fd;
-    box-shadow: 0 0 5px rgba(139, 233, 253, 0.2);
+    border-color: #00f0ff;
+    color: #00f0ff;
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.15);
 }
 
 button:nth-child(3n):hover {
-    background: #8be9fd;
-    color: #282a36;
-    box-shadow: 0 0 15px #8be9fd;
+    background: linear-gradient(135deg, #00f0ff, #7b2fff);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    border-color: transparent;
 }
 
 h3 {
-    color: #f1fa8c; /* Dracula Yellow */
+    font-family: 'Orbitron', sans-serif;
+    color: #ffb800; /* Synthwave amber/gold */
     margin-top: 25px;
-    font-size: 16px;
+    font-size: 13px;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(255, 184, 0, 0.3);
 }
 
 #hasil,
 #hasilLogika,
 #hasilTransformasi {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 700;
     margin-top: 10px;
-    color: #50fa7b; /* Dracula Green */
-    text-shadow: 0 0 10px #50fa7b;
+    color: #00f0ff;
+    text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
     padding: 15px;
-    background: #282a36;
-    border: 1px dashed #6272a4;
+    background: rgba(0, 240, 255, 0.05);
+    border: 1px solid rgba(0, 240, 255, 0.15);
     border-radius: 8px;
     word-break: break-all;
     min-height: 60px;
@@ -179,26 +230,22 @@ h3 {
     align-items: center;
 }
 
-/* Glitch animation for title */
-@keyframes glitch {
-    0% { transform: translate(0) }
-    20% { transform: translate(-2px, 2px) }
-    40% { transform: translate(-2px, -2px) }
-    60% { transform: translate(2px, 2px) }
-    80% { transform: translate(2px, -2px) }
-    100% { transform: translate(0) }
+/* Synthwave pulse animation for title */
+@keyframes synthPulse {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 0, 128, 0.6)) drop-shadow(0 0 40px rgba(255, 0, 200, 0.3)); }
+    50% { filter: drop-shadow(0 0 30px rgba(255, 0, 128, 0.8)) drop-shadow(0 0 60px rgba(255, 0, 200, 0.5)); }
 }
 
 h1:hover {
-    animation: glitch 0.2s cubic-bezier(.25, .46, .45, .94) both infinite;
+    animation: synthPulse 1.5s ease-in-out infinite;
 }
 
 .result-box {
     margin-top: 15px;
     padding: 15px;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px dashed #6272a4;
-    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 0, 200, 0.12);
+    border-radius: 10px;
     font-size: 14px;
 }
 
@@ -207,11 +254,12 @@ h1:hover {
 }
 
 .result-box p span {
-    color: #50fa7b; /* Dracula green for results */
-    font-weight: bold;
+    color: #00f0ff;
+    font-weight: 700;
+    text-shadow: 0 0 6px rgba(0, 240, 255, 0.3);
 }
 
-/* Override existing #hasil styles so they don't look weird inside result-box */
+/* Override existing result styles inside result-box */
 #hasil, #hasilLogika, #hasilTransformasi, #hasilBonus, #hasilAritmatika {
     font-size: 16px;
     text-shadow: none;
@@ -228,7 +276,8 @@ h1:hover {
     overflow-y: auto;
     padding: 15px;
     background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 0, 200, 0.08);
 }
 
 .history-box ul {
@@ -239,7 +288,7 @@ h1:hover {
 
 .history-box li {
     padding: 8px 0;
-    border-bottom: 1px dashed #44475a;
+    border-bottom: 1px solid rgba(255, 0, 200, 0.1);
     font-size: 14px;
 }
 
@@ -247,54 +296,94 @@ h1:hover {
     border-bottom: none;
 }
 
-/* Light Mode Overrides */
+/* Scrollbar styling */
+.history-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history-box::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.history-box::-webkit-scrollbar-thumb {
+    background: rgba(255, 0, 200, 0.3);
+    border-radius: 3px;
+}
+
+.history-box::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 0, 200, 0.5);
+}
+
+/* Light Mode — Retro Pastel Synthwave */
 body.light-mode {
-    background-color: #f8f8f2;
-    background-image: 
-        radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 80%),
-        linear-gradient(rgba(240, 240, 240, 1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 240, 240, 1) 1px, transparent 1px);
-    color: #282a36;
+    background: linear-gradient(180deg, #ffeef8 0%, #f0e0ff 40%, #e8f0ff 100%);
+    background-attachment: fixed;
+    color: #2a1040;
+}
+
+body.light-mode::before {
+    background:
+        linear-gradient(180deg, transparent 0%, rgba(255, 0, 128, 0.03) 100%),
+        repeating-linear-gradient(90deg, rgba(200, 0, 150, 0.04) 0px, transparent 1px, transparent 80px),
+        repeating-linear-gradient(0deg, rgba(200, 0, 150, 0.03) 0px, transparent 1px, transparent 40px);
 }
 
 body.light-mode::after {
-    opacity: 0.1;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 0, 128, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(0, 200, 255, 0.03) 0%, transparent 50%);
 }
 
 body.light-mode h1 {
-    color: #ff5555;
-    text-shadow: 0 0 10px rgba(255,85,85,0.4);
+    background: linear-gradient(180deg, #d300c5 0%, #ff2a6d 40%, #ff6ec7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    filter: drop-shadow(0 0 10px rgba(211, 0, 197, 0.3));
 }
 
 body.light-mode .card {
-    background: #ffffff;
-    border: 1px solid #dcdcdc;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 230, 255, 0.85) 100%);
+    border: 1px solid rgba(211, 0, 197, 0.15);
+    box-shadow: 0 4px 30px rgba(211, 0, 197, 0.08);
+}
+
+body.light-mode .card h2 {
+    color: #7b2fff;
+    text-shadow: none;
+    border-bottom-color: rgba(123, 47, 255, 0.15);
 }
 
 body.light-mode input, body.light-mode select {
-    background: #f1f1f1;
-    color: #282a36;
-    border: 1px solid #cccccc;
+    background: rgba(255, 255, 255, 0.8);
+    color: #2a1040;
+    border: 1px solid rgba(211, 0, 197, 0.2);
 }
 
 body.light-mode button {
-    color: #282a36;
-    border-color: #6272a4;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    color: #d300c5;
+    border-color: #d300c5;
+    box-shadow: 0 0 5px rgba(211, 0, 197, 0.1);
 }
 
 body.light-mode button:hover {
-    background: #6272a4;
+    background: linear-gradient(135deg, #d300c5, #ff2a6d);
     color: #fff;
-    box-shadow: 0 0 10px rgba(98,114,164,0.5);
+    box-shadow: 0 0 15px rgba(211, 0, 197, 0.3);
 }
 
-body.light-mode .result-box, body.light-mode .history-box {
-    background: rgba(0, 0, 0, 0.05);
-    border-color: #cccccc;
+body.light-mode .result-box,
+body.light-mode .history-box {
+    background: rgba(211, 0, 197, 0.04);
+    border-color: rgba(211, 0, 197, 0.1);
 }
 
 body.light-mode .result-box p span {
-    color: #ff5555;
+    color: #7b2fff;
+    text-shadow: none;
+}
+
+body.light-mode h3 {
+    color: #d300c5;
+    text-shadow: none;
 }
