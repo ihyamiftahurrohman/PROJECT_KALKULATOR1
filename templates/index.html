@@ -12,7 +12,7 @@
 <body>
 
 <div style="text-align: right; padding: 10px 20px;">
-    <button id="darkModeBtn" style="background: #44475a; color: #f8f8f2; border: 1px solid #6272a4;">Toggle Tema</button>
+    <button id="darkModeBtn" style="background: rgba(20, 0, 50, 0.8); color: #ff6ec7; border: 1px solid rgba(255, 0, 200, 0.3); font-family: 'Orbitron', sans-serif; font-size: 12px; letter-spacing: 1px;">Toggle Tema</button>
 </div>
 <h1>DigitalCalc</h1>
 
@@ -113,7 +113,7 @@
 
 <div class="card" style="grid-column: 1 / -1; position: relative;">
     <h2>Riwayat Perhitungan</h2>
-    <button onclick="clearHistory()" style="position: absolute; top: 20px; right: 25px; background: #ff5555; color: #fff; border-color: #ff5555;">Hapus Riwayat</button>
+    <button onclick="clearHistoryAndFields()" style="position: absolute; top: 20px; right: 25px; background: linear-gradient(135deg, #ff2a6d, #d300c5); color: #fff; border-color: transparent;">Hapus Riwayat</button>
     <div id="historyContainer" class="history-box">
         <p>Belum ada riwayat.</p>
     </div>
@@ -122,6 +122,60 @@
 </div>
 
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script>
+function clearHistoryAndFields() {
+    console.log("clearHistoryAndFields dipanggil");
+    
+    // Reset Aritmatika
+    const rumusAritmatika = document.getElementById("rumusAritmatika");
+    if (rumusAritmatika) rumusAritmatika.innerHTML = "-";
+    const langkahAritmatika = document.getElementById("langkahAritmatika");
+    if (langkahAritmatika) langkahAritmatika.innerHTML = "-";
+    const hasil = document.getElementById("hasil");
+    if (hasil) hasil.innerHTML = "-";
+    
+    // Reset Logika
+    const rumusLogika = document.getElementById("rumusLogika");
+    if (rumusLogika) rumusLogika.innerHTML = "-";
+    const langkahLogika = document.getElementById("langkahLogika");
+    if (langkahLogika) langkahLogika.innerHTML = "-";
+    const hasilLogika = document.getElementById("hasilLogika");
+    if (hasilLogika) hasilLogika.innerHTML = "-";
+    
+    // Reset Transformasi
+    const rumusTransformasi = document.getElementById("rumusTransformasi");
+    if (rumusTransformasi) rumusTransformasi.innerHTML = "-";
+    const langkahTransformasi = document.getElementById("langkahTransformasi");
+    if (langkahTransformasi) langkahTransformasi.innerHTML = "-";
+    const hasilTransformasi = document.getElementById("hasilTransformasi");
+    if (hasilTransformasi) hasilTransformasi.innerHTML = "-";
+    
+    // Reset Matematika Lanjut
+    const rumusBonus = document.getElementById("rumusBonus");
+    if (rumusBonus) rumusBonus.innerHTML = "-";
+    const langkahBonus = document.getElementById("langkahBonus");
+    if (langkahBonus) langkahBonus.innerHTML = "-";
+    const hasilBonus = document.getElementById("hasilBonus");
+    if (hasilBonus) hasilBonus.innerHTML = "-";
+    
+    // Panggil fetch langsung di sini
+    fetch('/clear_history', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+    })
+    .then(r => r.json())
+    .then(data => {
+        if(data.status === 'success') {
+            if (typeof renderHistory === 'function') {
+                renderHistory(data.history);
+            }
+        }
+    })
+    .catch(err => {
+        console.error("Error clearing history:", err);
+    });
+}
+</script>
 
 </body>
 </html>
