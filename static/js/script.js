@@ -9,9 +9,9 @@ function renderHistory(historyList) {
     let html = "<ul>";
     historyList.forEach(item => {
         html += `<li>
-            <span style="color: #6272a4;">[${item.waktu}]</span> 
-            <span style="color: #ff79c6;">${item.kategori} (${item.operasi}):</span> 
-            <span style="color: #50fa7b;">${item.langkah}</span>
+            <span style="color: rgba(160, 140, 200, 0.7);">[${item.waktu}]</span> 
+            <span style="color: #ff6ec7;">${item.kategori} (${item.operasi}):</span> 
+            <span style="color: #00f0ff;">${item.langkah}</span>
         </li>`;
     });
     html += "</ul>";
